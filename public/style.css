@@ -1,0 +1,59 @@
+body {
+  font-family: 'Open Sans Condensed', sans-serif;
+  padding: 1em;
+  color: #FAF6D1;
+  background: #23221D;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+}
+
+.menu {
+  float: right;
+}
+
+.description {
+  width: 90%;
+  background: #faf6d1;
+  color: #232210;
+  padding: 1em;
+  margin: 0 auto;
+  font-size: 16pt;
+}
+
+section {
+  background: #0F0E0C;
+  opacity: .8;
+  padding: 1em;
+  padding-top: 3em;
+  width: 20uv;
+}
+
+section h1 {
+  font-size: 24pt;
+}
+
+table {
+  width: 90%;
+  background: #faf6d1;
+  color: #232210;
+  margin: 0 auto;
+  font-size: 16pt;
+}
+
+th {
+    font-family: 'Raleway', sans-serif;
+
+}
+td {
+  padding: 1em;
+}
+
+path.domain { stroke: #faf6d1; }
+.tick text { stroke: #888; }
+.c3-legend-item text { stroke: #888; }
+
+.c3-tooltip-container {
+  color: #888;
+}
