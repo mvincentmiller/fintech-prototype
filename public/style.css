@@ -34,6 +34,10 @@ section h1 {
   font-size: 24pt;
 }
 
+input.form-control {
+  height: 3em;
+}
+
 table {
   width: 90%;
   background: #faf6d1;
@@ -47,6 +51,7 @@ th {
 
 }
 td {
+  text-align: center;
   padding: 1em;
 }
 
@@ -57,3 +62,12 @@ path.domain { stroke: #faf6d1; }
 .c3-tooltip-container {
   color: #888;
 }
+
+a {
+  color: #888;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: highlight;
+  color: #fff;}

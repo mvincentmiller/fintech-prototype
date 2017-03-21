@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar">
+    </span><span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span>FINTECH PROTOTYPE</span></a></div>
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="/">Profile</a></li>
+                    <li><a href="/cattle  ">Cattle</a></li>
+                    <li style="background:#888;"><a><i class="fa fa-print fa-2x text-inverse" onclick="window.print()"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script src="bundle.js"></script>
+</body>
+<section>
+  <h1><%= commodity %></h1>
+  <div id="chart"></div>
+</section>
+<section>
+<div class="description">
+  <img src="https://www.elemetalvault.com/images/landing/lbma-good-delivery.png">
+  <p>The LBMA is an international trade association, representing the London market for gold and silver bullion which has a global client base. This includes the majority of the gold-holding central banks, private sector investors, mining companies, producers, refiners and fabricators. The on-going work of the Association covers a number of areas, among them refining standards, trading documentation and the development of good trading practices.</p>
+  <h4>LBMA Silver Price</h4>
+  <p>The London Silver Fix had been a global benchmark for 117 years. This new process for establishing the new LBMA Silver Price will maintain continuity with the earlier silver fixing process for market participants while also increasing transparency via an electronic platform for the auction. It continues to be London-based and offers a fully IOSCO-compliant solution to the London bullion marketplace. The earlier benchmarking process has been followed in order to minimise any possible disruptions and enable a seamless transition for the market. Participants with a Reuters terminal can view the live auction by quoting the RIC 0#LDNXAG. Further details on licensing arrangements for The LBMA SilverPrice are available on Thomson Reuters website here.</p>
+</div>
+</section>
+<section>
+
+</section>
+<section>
+<h1><i class="fa fa-rss" aria-hidden="true"></i></h1>
+</section>
+
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+
+<script>
+console.log(`'<%=commodity%>'`);
+var dates = ['Dates'];
+var settle = ['Dollar'];
+var high = ['Pound'];
+var low = ['Euro'];
+     <% for(var d in data) { %>
+  dates.push(`<%=data[d][0]%>`)
+  settle.push(`<%=data[d][1]%>`)
+  high.push(`<%=data[d][2]%>`)
+  low.push(`<%=data[d][3]%>`)
+<%}%>
+
+
+var chart = c3.generate({
+    bindto: "#chart",
+    data: {
+      x: 'Dates',
+   columns: [
+       dates,
+       settle,
+       high,
+       low
+   ]    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d'
+            }
+        }
+    }
+});
+</script>

@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
+</head>
+<body>
+
+<span class="branding">FINTECH prototype</span><span class="menu"><i class="fa fa-print fa-2x" aria-hidden="true" onclick="window.print()"></i></span>
+
 <section>
-  <h1><%= commodity %></h1>
+   <h1><i class="fa fa-line-chart" aria-hidden="true"></i>
+<%= commodity %></h1>
   <div id="chart"></div>
 </section>
 <section>
@@ -9,28 +22,7 @@
   <h4>Live Cattle Futures</h4>
   <p>Live cattle futures began trading in 1964 at the Chicago Mercantile Exchange (CME) as the first non-storable futures contract. Live cattle are traditionally raised in the Midwest, Southwest, and California (in the US). The term live cattle refers to cattle that have reached the necessary weight for slaughter.</p>
 </div>
-</section>
-<section>
-<table>
-<tr>
-     <% for(n=0; n<names.length-1;n++) { %>
-     <th><%= names[n]%></th>
-     <% } %>
-</tr>
-     <% for(var d in data) { %>
-<tr>
-     <td><%= data[d][0]%></td>
-     <td><%= data[d][1]%></td>
-     <td><%= data[d][2]%></td>
-     <td><%= data[d][3]%></td>
-     <td><%= data[d][4]%></td>
-     <td><%= data[d][5]%></td>
-     <td><%= data[d][6]%></td>
-     <td><%= data[d][7]%></td>
-</tr>
-     <% } %>
-</table>
-</section>
+
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
@@ -47,8 +39,6 @@ var low = ['low'];
   high.push(`<%=data[d][2]%>`)
   low.push(`<%=data[d][3]%>`)
 <%}%>
-
-console.log(dates);
 
 var chart = c3.generate({
     bindto: "#chart",
@@ -70,3 +60,5 @@ var chart = c3.generate({
     }
 });
 </script>
+<script src="bundle.js"></script>
+</body>

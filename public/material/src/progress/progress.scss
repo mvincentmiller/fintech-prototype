@@ -1,0 +1,64 @@
+.mdl-progress {
+  min-width: 100px;
+  width: auto;
+  > .bufferbar {
+    background: {
+      image: none;
+      color: $progress-secondary-color;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+  &--red {
+    &, &.mdl-progress__indeterminate {
+      & > .bar1 {
+        background-color: $color-red;
+      }
+      & > .bar3 {
+        background: transparent !important;
+      }
+    }
+  }
+  &--blue {
+    &, &.mdl-progress__indeterminate {
+      & > .bar1 {
+        background-color: $color-blue;
+      }
+      & > .bar3 {
+        background: transparent !important;
+      }
+    }
+  }
+  &--yellow {
+    &, &.mdl-progress__indeterminate {
+      & > .bar1 {
+        background-color: $color-yellow;
+      }
+      & > .bar3 {
+        background: transparent !important;
+      }
+    }
+
+  }
+  &--light-blue {
+    &, &.mdl-progress__indeterminate {
+      & > .bar1 {
+        background-color: $color-light-blue;
+      }
+      & > .bar3 {
+        background: transparent !important;
+      }
+    }
+  }
+  &--purple {
+    &, &.mdl-progress__indeterminate {
+      & > .bar1 {
+        background-color: $color-purple;
+      }
+      & > .bar3 {
+        background: transparent !important;
+      }
+    }
+  }
+}
