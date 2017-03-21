@@ -35,9 +35,21 @@ app.use(views(__dirname + '/views', {
 
 const io = new IO()
 
-//TODO migrate koa-request -> koa2-request using await
-let commodity = 'LBMA/SILVER';
-async function queryQuandl(ctx, next) {
+
+async function queryFirebase (ctx, next) {
+let refUsersBob = db.ref("Users/Bob");
+let yF = await refUsersBob.once("value",
+    function(snapshot) {
+        F++;
+        console.log('app.js: ! ---- FIREBASE REF #' + F + ' ----- !');
+        console.log(snapshot.val());
+    });
+
+ctx.FirebaseResult = JSON.parse(yF.A);
+return next();
+}
+
+async function queryQuandl(commodity, ctx, next) {
   let result = await request({
       url: 'http://www.quandl.com/api/v3/datasets/' + commodity +
           '/data.json?api_key=' + QUANDLAPIKEY + '&start_date=2017-01-01',
@@ -48,104 +60,56 @@ async function queryQuandl(ctx, next) {
       },
       json: true
   })
-  ctx.result = result.body
+  Q++;
+  console.log('! ---- QUANDL API HIT #' + Q + '----- !');
+  ctx.QuandlResult = result.body
   return next();
 }
 
-//TODO generators are deprecated, migrate koa routes
-router.get('/koa2', (ctx, next) => {
-return queryQuandl(ctx, next);
+router.get('/', (ctx, next) => {
+return queryFirebase(ctx, next);
 },
   (ctx, next) => {
-    ctx.moar = { moar: 'stuff' }
-    return next();
+let commodity = 'LBMA/SILVER';
+return queryQuandl(commodity, ctx, next);
 },
 (ctx) => {
-  return ctx.render('x', {
-    data: ctx.result.dataset_data.data,
-    moar: ctx.moar.moar
+  let fireParsed = ctx.FirebaseResult;
+  let UserName = fireParsed['UserProfile'].UserName;
+  let Cattle = fireParsed['Commodities'].Cattle;
+  let Silver = fireParsed['Commodities'].Silver;
+  return ctx.render('profile', {
+      commodity: 'LBMA/SILVER',
+      names: ctx.QuandlResult.dataset_data.column_names,
+      data: ctx.QuandlResult.dataset_data.data,
+      user: UserName,
+      commodities: fireParsed['Commodities']
   })
 })
 
-
-
 //TODO Migrate to NVD3.js
 
+router.get('/silver', (ctx, next) =>  {
+    ctx.commodity = 'LBMA/SILVER';
+    return queryQuandl(ctx.commodity, ctx, next);
+  }, (ctx) => {
+    return ctx.render('silver', {
+    commodity: 'LBMA/SILVER',
+    names: ctx.QuandlResult.dataset_data.column_names,
+    data: ctx.QuandlResult.dataset_data.data
+})
+  });
 
-
-
-router.get('/', function*() {
-
-    let refUsersBob = db.ref("Users/Bob");
-    let yF = yield refUsersBob.once("value",
-        function(snapshot) {
-            F++;
-            console.log('app.js: ! ---- FIREBASE REF #' + F + ' ----- !');
-            console.log(snapshot.val());
-        });
-    let fireParsed = JSON.parse(yF.A);
-    let UserName = fireParsed['UserProfile'].UserName;
-    let Cattle = fireParsed['Commodities'].Cattle;
-    let Silver = fireParsed['Commodities'].Silver;
-
-    let commodity = Silver;
-    let options = {
-        url: 'http://www.quandl.com/api/v3/datasets/' + commodity +
-            '/data.json?api_key=' + QUANDLAPIKEY + '&start_date=2017-01-01',
-    };
-
-    let response = yield request(options);
-    let parsed = JSON.parse(response.body);
-    Q++;
-    console.log('app.js: ! ---- QUANDL API HIT #' + Q + '----- !');
-    yield this.render('profile', {
-        commodity: commodity,
-        names: parsed.dataset_data.column_names,
-        data: parsed.dataset_data.data,
-        user: UserName,
-        commodities: fireParsed['Commodities']
-    })
-    broadcast('app.js: ! ---- QUANDL API HIT #' + Q + '----- !');
-});
-
-router.get('/silver', function*() {
-    let commodity = 'LBMA/SILVER';
-    let options = {
-        url: 'http://www.quandl.com/api/v3/datasets/' + commodity +
-            '/data.json?api_key=' + QUANDLAPIKEY + '&start_date=2017-01-01',
-    };
-
-    let response = yield request(options);
-    let parsed = JSON.parse(response.body);
-    Q++;
-    console.log('app.js: ! ---- QUANDL API HIT #' + Q + '----- !');
-    yield this.render('silver', {
-        commodity: commodity,
-        names: parsed.dataset_data.column_names,
-        data: parsed.dataset_data.data
-    })
-
-});
-
-router.get('/cattle', function*() {
-
-    //cattle futures, CME Group
-    let commodity = 'CHRIS/CME_LC1';
-
-    let options = {
-        url: 'http://www.quandl.com/api/v3/datasets/' + commodity + '/data.json?api_key=' +
-            QUANDLAPIKEY + '&start_date=2017-01-01'
-    };
-    let response = yield request(options);
-    Q++;
-    console.log('app.js: ! ---- QUANDL API HIT #' + Q + ' ----- !');
-    let parsed = JSON.parse(response.body);
-    yield this.render('cattle', {
-        commodity: commodity,
-        names: parsed.dataset_data.column_names,
-        data: parsed.dataset_data.data
-    })
-});
+  router.get('/cattle', (ctx, next) =>  {
+      ctx.commodity = 'CHRIS/CME_LC1';
+      return queryQuandl(ctx.commodity, ctx, next);
+    }, (ctx) => {
+      return ctx.render('cattle', {
+      commodity: ctx.commodity,
+      names: ctx.QuandlResult.dataset_data.column_names,
+      data: ctx.QuandlResult.dataset_data.data
+  })
+    });
 
 app
     .use(router.routes())
