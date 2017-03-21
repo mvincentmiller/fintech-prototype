@@ -106,12 +106,14 @@
 </body>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
-
+ <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="bundle.js"></script>
 
 <script>
 
-console.log(`'<%=commodity%>'`);
+var socket = io()
+
+socket.emit('join',`'<%=commodity%>'`);
 var dates = ['Dates'];
 var settle = ['Dollar'];
 var high = ['Pound'];
@@ -131,9 +133,9 @@ var chart = c3.generate({
             ['Euro', low[1]]
         ],
         type : 'pie',
-        onclick: function (d, i) { console.log("onclick", d, i); },
-        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+        onclick: function (d, i) { console.log("onclick", d, i); socket.emit('join', d)},
+        onmouseover: function (d, i) { /*console.log("onmouseover", d, i);*/ },
+        onmouseout: function (d, i) {/* console.log("onmouseout", d, i); */}
     }
 });
 
