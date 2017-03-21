@@ -7,9 +7,9 @@ var socket = io()
 
 socket.on('push', (data) => {
   console.log(data);
-  var p = document.createElement("p");
-          p.innerHTML = data;
-          document.body.appendChild(p);
+  var h = document.createElement("h1");
+          h.innerHTML = data;
+          document.body.appendChild(h);
 });
 
 function reqListener () {
