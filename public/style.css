@@ -71,3 +71,14 @@ a {
 a:hover {
   text-decoration: highlight;
   color: #fff;}
+
+#msg-area {
+  display: none;
+  width: 80%;
+  background: #000;
+  padding: 1em;
+  z-index: 999;
+  font-size: 24pt;
+  margin: 0 auto;
+  margin-top: 3em;
+}

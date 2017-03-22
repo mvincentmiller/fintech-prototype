@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -44,6 +48,7 @@
                   <p></p><p></p>
                   <a href="/silver"><p><%= commodities.Silver %></p></a>
                   <a href="/cattle"><p><%= commodities.Cattle %></p></a>
+
                   <h1>---</h1>
                   <p></p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
@@ -53,8 +58,8 @@
                   <br><br><br>
                   <form role="form">
                       <div class="form-group">
-                          <div class="input-group"> <input type="text" class="form-control" placeholder="...">
-                             <span class="input-group-btn"> <a class="btn btn-success" type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a> </span> </div>
+                          <div class="input-group"> <input id="searchbar" type="text" class="form-control" placeholder="...">
+                             <span class="input-group-btn"> <a class="btn btn-success" type="submit"><i id="search" class="fa fa-search fa-2x" aria-hidden="true"></i></a> </span> </div>
                       </div>
                   </form>
                 </div>
@@ -103,6 +108,7 @@
             </div>
         </div>
     </footer>
+      <div id="msg-area">NOTFICATION <hr></div>
 </body>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
@@ -113,7 +119,7 @@
 
 var socket = io()
 
-socket.emit('join',`'<%=commodity%>'`);
+
 var dates = ['Dates'];
 var settle = ['Dollar'];
 var high = ['Pound'];

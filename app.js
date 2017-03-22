@@ -8,7 +8,6 @@ const router = require('./app/routes');
 const app = new Koa();
 const IO = require( 'koa-socket' );
 
-
 app.use(webpackDevServer({
     config: './webpack.config.js'
 }));
@@ -30,7 +29,7 @@ io.attach( app )
 
 io.on( 'join', ( ctx, data ) => {
       console.log( 'join event fired', data )
-
+      broadcast(data);
       })
 
 function broadcast(data) {io.broadcast('push', data)}

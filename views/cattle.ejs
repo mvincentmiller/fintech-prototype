@@ -3,6 +3,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
 </head>
@@ -10,22 +14,24 @@
 
 <span class="branding">FINTECH prototype</span><span class="menu"><i class="fa fa-print fa-2x" aria-hidden="true" onclick="window.print()"></i></span>
 
-<section>
+<div class="section">
    <h1><i class="fa fa-line-chart" aria-hidden="true"></i>
 <%= commodity %></h1>
   <div id="chart"></div>
-</section>
-<section>
+</div>
+<div class="section">
 <div class="description">
   <img src="http://cta.gate39tech2.com/ctaexpo/wp-content/uploads/sites/2/cta-logo6.png">
   <p>CME Group Inc. (Chicago Mercantile Exchange & Chicago Board of Trade) is an American financial market company operating the world's largest options and futures exchange. It owns and operates large derivatives and futures exchanges in Chicago, New York City, and exchange facilities in London, using online trading platforms.[3][4] It also owns the Dow Jones stock and financial indexes, and CME Clearing Services, which provides settlement and clearing of exchange trades. The exchange-traded derivative contracts include futures and options based on interest rates, equity indexes, foreign exchange, energy, agricultural commodities, rare and precious metals, weather, and real estate. It has been described by The Economist as "The biggest financial exchange you have never heard of."</p>
   <h4>Live Cattle Futures</h4>
   <p>Live cattle futures began trading in 1964 at the Chicago Mercantile Exchange (CME) as the first non-storable futures contract. Live cattle are traditionally raised in the Midwest, Southwest, and California (in the US). The term live cattle refers to cattle that have reached the necessary weight for slaughter.</p>
 </div>
-
+</div>
+<div id="msg-area"></div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
-
+ <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="bundle.js"></script>
 <script>
 console.log(`'<%=commodity%>'`);
 var dates = ['Dates'];
