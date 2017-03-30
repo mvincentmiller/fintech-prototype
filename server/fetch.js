@@ -1,4 +1,5 @@
-// circle.js
+// fetch.js
+console.log('fetch.js');
 const request = require('koa2-request');
 const firebase = require("firebase");
 const admin = require("firebase-admin");
@@ -8,6 +9,7 @@ const SERVICEACCOUNT = keys.s.fireSA;
 const FIREBASECONFIG = keys.s.fireConfig;
 let F = 0;
 let Q = 0;
+
 
 
 firebase.initializeApp(FIREBASECONFIG)

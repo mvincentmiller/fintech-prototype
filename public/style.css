@@ -82,3 +82,9 @@ a:hover {
   margin: 0 auto;
   margin-top: 3em;
 }
+
+#reactBox {
+ width: 30em;
+ margin: 0 auto;
+ background: #888;
+}

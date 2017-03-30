@@ -3,6 +3,10 @@ const fetch = require('./fetch');
 
 console.log('in routes');
 
+router.get('/react', (ctx, next) => {
+return ctx.render('react')
+});
+
 router.get('/', (ctx, next) => {
 return fetch.queryFirebase(ctx, next);
 },
@@ -16,7 +20,7 @@ return fetch.queryQuandl(commodity, ctx, next);
   let Cattle = fireParsed['Commodities'].Cattle;
   let Silver = fireParsed['Commodities'].Silver;
   return ctx.render('profile', {
-      commodity: 'LBMA/SILVER',
+      commodity: Silver,
       names: ctx.QuandlResult.dataset_data.column_names,
       data: ctx.QuandlResult.dataset_data.data,
       user: UserName,
@@ -47,4 +51,5 @@ router.get('/silver', (ctx, next) =>  {
       data: ctx.QuandlResult.dataset_data.data
   })
     });
+
 module.exports = router;
