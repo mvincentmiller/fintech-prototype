@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 section {
-  background: #0F0E0C;
+  /*background: #0F0E0C;*/
   opacity: .8;
   padding: 1em;
   padding-top: 3em;
@@ -75,7 +75,7 @@ a:hover {
 #msg-area {
   display: none;
   width: 80%;
-  background: #000;
+/*  background: #000;*/
   padding: 1em;
   z-index: 999;
   font-size: 24pt;
@@ -86,5 +86,5 @@ a:hover {
 #reactBox {
  width: 30em;
  margin: 0 auto;
- background: #888;
+/* background: #888;*/
 }
